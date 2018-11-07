@@ -27,6 +27,9 @@ public class SysDeptService {
     @Resource
     private SysDeptMapper sysDeptMapper;
 
+    @Resource
+    private SysLogService sysLogService;
+
     public void save(DeptParam param) {
 
         BeanValidator.check(param);
@@ -44,7 +47,7 @@ public class SysDeptService {
         dept.setOperateTime(new Date());
 
         sysDeptMapper.insertSelective(dept);
-
+        sysLogService.saveDeptLog(null, dept);
     }
 
     public void update(DeptParam param) {
@@ -72,7 +75,7 @@ public class SysDeptService {
 
         updateWithChild(before, after);
 
-
+        sysLogService.saveDeptLog(before, after);
     }
 
     public void delete(int deptId){
