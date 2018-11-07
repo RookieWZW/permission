@@ -41,17 +41,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <filter>
-    <filter-name>loginFilter</filter-name>
-    <filter-class>com.mmall.filter.LoginFilter</filter-class>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/sys/*</url-pattern>
-    <url-pattern>/admin/*</url-pattern>
-  </filter-mapping>
-
   <!-- druid -->
   <servlet>
     <servlet-name>DruidStatServlet</servlet-name>
@@ -80,6 +69,34 @@
   <filter-mapping>
     <filter-name>DruidWebStatFilter</filter-name>
     <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.mmall.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/sys/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>aclControlFilter</filter-name>
+    <filter-class>com.mmall.filter.AclControllerFilter</filter-class>
+    <init-param>
+      <param-name>targetFilterLifecycle</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>exclusionUrls</param-name>
+      <param-value>/sys/user/noAuth.page,/login.page</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>aclControlFilter</filter-name>
+    <url-pattern>/sys/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
   </filter-mapping>
 
   <welcome-file-list>

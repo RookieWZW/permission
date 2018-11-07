@@ -88,7 +88,7 @@ public class SysCoreService {
             return true;
         }
 
-        List<SysAcl> userAclList = getCurrentUserAclListFromCache();
+        List<SysAcl> userAclList = getCurrentUserAclList();
         Set<Integer> userAclIdSet = userAclList.stream().map(acl -> acl.getId()).collect(Collectors.toSet());
 
         boolean hasValidAcl = false;
